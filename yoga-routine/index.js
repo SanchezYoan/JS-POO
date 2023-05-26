@@ -17,7 +17,7 @@ let exerciceArray = [];
 // Get stored exercices array
 (() => {
   if (localStorage.exercices) {
-    exerciceArray = localStorage.exercices;
+    exerciceArray = JSON.parse(localStorage.exercices);
   } else {
     exerciceArray = basicArray;
   }
@@ -51,7 +51,7 @@ class Exercice {
         this.seconds--;
         this.updateCountdown();
       }
-    }, 1000);
+    }, 10);
     return (main.innerHTML = `
     <div class="exercice-container"</div>
     <p>${this.minutes}:${this.seconds}</p>
@@ -171,6 +171,9 @@ const page = {
       "<button id='start'>Recomencer</button>",
       "<button id='reboot' class='btn-reboot'>Réinitialiser <i class='fas fa-time-circle'></i></button"
     );
+
+    start.addEventListener("click", () => this.routine());
+    reboot.addEventListener("click", () => utils.reboot());
   },
 };
 
